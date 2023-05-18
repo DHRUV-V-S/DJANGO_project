@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Start your development with Creative Studio landing page.">
+    <meta name="author" content="Devcrud">
+    <title>Creative-Studio</title>
+
+    <!-- font icons -->
+    <link rel="stylesheet" href="{% static 'assets/vendors/themify-icons/css/themify-icons.css' %} ">
+
+    <!-- Bootstrap + Creative Studio main styles -->
+	<link rel="stylesheet" href="{% static 'assets/css/creative-studio.css ' %} ">
+
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+    
+    <!-- Page Navigation -->
+    <!--Freeaze navbar-->
+    
+    <nav class="navbar custom-navbar navbar-expand-lg navbar-dark " data-spy="affix" data-offset-top="20">
+        <div class="container">
+            <a class="navbar-brand" href="#contact">
+                <img src=" {% static 'assets/imgs/logo.png' %}" alt="image">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#service">Service</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#portfolio">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#team">Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        {% if user.is_authenticated %}
+                        <a class="nav-link btn btn-primary btn-sm ml-lg-3" href="/logout">Logout</a>
+                        {% else %}
+                        <a class="nav-link btn btn-primary btn-sm ml-lg-3" href="/login">Login/Signup</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Of Page Navigation -->
+
+    <!-- Page Header -->
+    <header class="header">
+        <div class="overlay">
+
+            {% if user.is_authenticated %}
+            <h6 class="subtitle">Welcome {{user.username}}</h6><br>
+            <h6 class="subtitle">Small Team With Big Ideas</h6>
+            {% else %}
+            <h6 class="subtitle">Small Team With Big Ideas</h6>
+            {% endif %}
+
+            <h1 class="title">Creative Studio</h1>
+            <div class="buttons text-center">
+                <a href="#service" class="btn btn-primary rounded w-lg btn-lg my-1">Our Service</a>
+                <a href="#contact" class="btn btn-outline-light rounded w-lg btn-lg my-1">Contact Us</a>
+            </div>              
+        </div>      
+    </header>
+    <!-- End Of Page Header -->
+
+    <!-- Box -->
+    <div class="box text-center">
+        {% for feature in features %}
+        <div class="box-item">
+            <i class="ti-vector"></i>
+            <h6 class="box-title">{{feature.name}}</h6>
+            <p>{{feature.details}}</p>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- End of Box -->
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-5 col-lg-4">
+                    <!-- reduce image size -->
+
+                    <img src="{% static 'assets/imgs/about.jpg'%}" alt="images" height ='350px'>
+            
+                </div>
+                <div class="col-md-7 col-lg-8">
+                    <h6 class="section-subtitle mb-0">We Create</h6>
+                    <h6 class="section-title mb-3">Awesome Work</h6>
+                    <p>Welcome to our small group of creative coders, where innovation meets functionality! We are a team of passionate individuals who excel in crafting exceptional digital solutions tailored to your needs. With expertise in web development, app development, and a range of other services, we are your go-to source for turning your ideas into reality.</p>
+                    <p>Whether you're a startup looking to establish your online presence or an established business seeking to enhance your digital footprint, our dedicated team of developers is here to guide you every step of the way. We understand that your project is unique, and we pride ourselves on our ability to deliver custom solutions that align perfectly with your vision.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End of About Section -->
+
+    <!-- About Section with bg -->
+    <section class="has-bg-img py-md">
+        <div class="container text-center">
+            <h6 class="section-subtitle">We See</h6>
+            <h6 class="section-title mb-6">What Other Don't See.</h6>
+            <div class="widget mb-4">
+                <div class="widget-item">
+                    <i class="ti-notepad"></i>
+                    <h4>Planning</h4>
+                </div>
+                <div class="widget-item">
+                    <i class="ti-layout"></i>
+                    <h4>Mockup</h4>
+                </div>
+                <div class="widget-item">
+                    <i class="ti-filter"></i>
+                    <h4>Develope</h4>
+                </div>
+                <div class="widget-item">
+                    <i class="ti-thumb-up"></i>
+                    <h4>Provide</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Of About Sectoin -->
+
+    <!-- Service Section -->
+    <section id="service">
+        <div class="container">
+            <h6 class="section-subtitle text-center">Makes Happen</h6>
+            <h5 class="section-title text-center mb-6">Our Services</h5> 
+            <div class="row">
+
+                {% for service in services %}
+                <div class="col-sm-4 col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h2 class="mb-4"><i class="ti-filter text-primary"></i></h2>
+                            <h6 class="card-title">{{service.name}}</h6>
+                            <p>{{service.details}}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>  
+        </div>
+    </section>
+    <!-- End of Service Section -->
+
+    <!-- Portfolio section -->
+    <section id="portfolio">
+        <div class="container text-center">
+            <h6 class="section-subtitle">Our Awesome Works</h6>
+            <h6 class="section-title mb-5">Our Portfolio</h6>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="img-wrapper">
+                        <img src="{% static 'assets/imgs/folio-1.jpg' %}" alt="Image">
+                        <div class="overlay">
+                            <div class="overlay-infos">
+                                <h5>Notebooks</h5>
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="{% static 'assets/imgs/folio-2.jpg' %}" alt="Image">
+                        <div class="overlay">
+                            <div class="overlay-infos">
+                                <h5>Pens and Pencils</h5>
+                            </div>                              
+                        </div>
+                    </div>                  
+                </div>
+                <div class="col-sm-4">
+                    <div class="img-wrapper">
+                        <img src="{% static 'assets/imgs/folio-3.jpg' %}" alt="Image">
+                        <div class="overlay">
+                            <div class="overlay-infos">
+                                <h5> Custom cards</h5>
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="{% static 'assets/imgs/folio-4.jpg' %}" alt="Image">
+                        <div class="overlay">
+                            <div class="overlay-infos">
+                                <h5>Pen holders</h5>
+                            </div>                              
+                        </div>
+                    </div>                  
+                </div>
+                <div class="col-sm-4">
+                    <div class="img-wrapper">
+                        <img src="{% static 'assets/imgs/folio-5.jpg' %}" alt="Image">
+                        <div class="overlay">
+                            <div class="overlay-infos">
+                                <h5>Notebooks</h5>
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="{% static 'assets/imgs/folio-6.jpg' %}" alt="Image">
+                        <div class="overlay">
+                            <div class="overlay-infos">
+                                <h5>Stationary items</h5>
+                            </div>                              
+                        </div>
+                    </div>                  
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End of portfolio section -->
+
+    <!-- Team Section -->
+    <section id="team">
+        <div class="container">
+            <h6 class="section-subtitle text-center">Meet Our</h6>
+            <h6 class="section-title mb-5 text-center">Awesome Team</h6>
+            <div class="row">
+
+                
+                <div class="col-sm-6 col-md-4">
+                    <div class="card text-center mb-4">
+                        <!-- reduce image size -->
+                        <img class="card-img-top inset" src=" {% static 'assets/imgs/DHRUVVS.jpg' %}" alt="Image" style="width: 250px; height: auto;">
+                        <div class="card-body">
+                            <h5 class="card-title">DHRUV V S</h5>
+                            <h6 class="small text-primary font-weight-bold">CEO</h6>
+                            
+                            <p>Meet our extraordinary startup CEO, a visionary leader driving innovation, challenging industry norms, and making a positive impact. With a commitment to fostering collaboration and empowering their diverse team, they inspire meaningful change. Their strategic prowess and determination position them to shape the future and leave a lasting legacy.</p>
+                            <div class="socials">
+                                <a href="https://facebook.com"><i class="ti-facebook"></i> </a>
+                                <a href="https://github.com"><i class="ti-github"></i></a>
+                                <a href="https://dropbox.com"><i class="ti-dropbox"></i></a>
+                                <a href="https://twitter.com"><i class="ti-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="card text-center mb-4">
+                        
+                        <img class="card-img-top inset" src=" {% static 'assets/imgs/DHANUSH.jpg' %}" alt="Image" style="width: 250px; height: auto;">
+                        <div class="card-body">
+                            <h5 class="card-title">DHANUSH KRISHNA R</h5>
+                            <h6 class="small text-primary font-weight-bold">CTO</h6>
+                            
+                            <p>Introducing our innovative and dynamic startup CTO, leading the charge in technological advancements and strategic direction. With a deep understanding of emerging technologies, this visionary leader drives innovation, oversees technical teams, and ensures the company stays ahead of the curve in a rapidly evolving industry. Their expertise and passion for cutting-edge solutions fuel the startup's success and propel it towards a future of limitless possibilities.</p>
+                            <div class="socials">
+                                <a href="https://facebook.com"><i class="ti-facebook"></i> </a>
+                                <a href="https://github.com"><i class="ti-github"></i></a>
+                                <a href="https://dropbox.com"><i class="ti-dropbox"></i></a>
+                                <a href="https://twitter.com"><i class="ti-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="card text-center mb-4">
+                        
+                        <img class="card-img-top inset" src=" {% static 'assets/imgs/JITHIN.jpg' %}" alt="Image" style="width: 200px; height: auto;">
+                        <div class="card-body">
+                            <h5 class="card-title">JITHIN JOHN</h5>
+                            <h6 class="small text-primary font-weight-bold">COO</h6>
+                            
+                            <p>Meet our results-driven startup COO, responsible for optimizing operations and driving efficiency. With a keen eye for detail and strong leadership skills, this dynamic executive ensures seamless coordination among departments, streamlines processes, and maximizes resources to achieve strategic objectives. Their expertise in operational excellence paves the way for the startup's growth and success in a competitive market.</p>
+                            <div class="socials">
+                                <a href="https://facebook.com"><i class="ti-facebook"></i> </a>
+                                <a href="https://github.com"><i class="ti-github"></i></a>
+                                <a href="https://dropbox.com"><i class="ti-dropbox"></i></a>
+                                <a href="https://twitter.com"><i class="ti-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="card text-center mb-4">
+                        
+                        <img class="card-img-top inset" src=" {% static 'assets/imgs/HARI.jpg' %}" alt="Image" style="width: 200px; height: auto;">
+                        <div class="card-body">
+                            <h5 class="card-title">HARIPRASAD P</h5>
+                            <h6 class="small text-primary font-weight-bold">CFO</h6>
+                           
+                            <p>Introducing our seasoned startup CFO, an astute financial strategist guiding the company's fiscal success. With a sharp analytical mind and deep financial expertise, this visionary leader manages budgets, fundraising, and financial planning to ensure optimal financial health. Their strategic insights drive informed decision-making and pave the way for sustainable growth and profitability.</p>
+                            <div class="socials">
+                                <a href="https://facebook.com"><i class="ti-facebook"></i> </a>
+                                <a href="https://github.com"><i class="ti-github"></i></a>
+                                <a href="https://dropbox.com"><i class="ti-dropbox"></i></a>
+                                <a href="https://twitter.com"><i class="ti-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+                <div class="col-sm-6 col-md-4">
+                    <div class="card text-center mb-4">
+                        
+                        <img class="card-img-top inset" src=" {% static 'assets/imgs/ARJUN.jpg' %}" alt="Image" style="width: 300px; height: auto;">
+                        <div class="card-body">
+                            <h5 class="card-title">ARJUN PA</h5>
+                            <h6 class="small text-primary font-weight-bold">CMO</h6>
+                            
+                            <p>Meet our dynamic startup CMO, a visionary marketer driving brand growth and customer engagement. With a keen understanding of market trends and consumer behavior, this strategic leader develops and executes innovative marketing strategies that elevate the startup's brand presence. Their creativity and passion for storytelling captivate audiences, fueling the company's success and driving sustainable business growth.</p>
+                            <div class="socials">
+                                <a href="https://facebook.com"><i class="ti-facebook"></i> </a>
+                                <a href="https://github.com"><i class="ti-github"></i></a>
+                                <a href="https://dropbox.com"><i class="ti-dropbox"></i></a>
+                                <a href="https://twitter.com"><i class="ti-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+                <div class="col-sm-6 col-md-4">
+                    <div class="card text-center mb-4">
+                        
+                        <img class="card-img-top inset" src=" {% static 'assets/imgs/AJAY.jpg' %}" alt="Image" style="width: 300px; height: auto;">
+                        <div class="card-body">
+                            <h5 class="card-title">AJAY G NAIR</h5>
+                            <h6 class="small text-primary font-weight-bold">CPO</h6>
+                            
+                            <p>Introducing our visionary startup CPO, driving product strategy and innovation to captivate the market. With a deep understanding of user needs and emerging trends, this strategic leader guides the development of cutting-edge products that disrupt the industry. Their relentless pursuit of excellence and customer-centric approach position the startup as a trailblazer, delivering transformative solutions to meet market demands.</p>
+                            <div class="socials">
+                                <a href="https://facebook.com"><i class="ti-facebook"></i> </a>
+                                <a href="https://github.com"><i class="ti-github"></i></a>
+                                <a href="https://dropbox.com"><i class="ti-dropbox"></i></a>
+                                <a href="https://twitter.com"><i class="ti-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>               
+                
+
+            </div>
+        </div>
+    </section>
+    <!-- End of Team Sectoin -->
+
+    <!-- Fatcs Section -->
+    <section class="has-bg-img bg-img-2">
+        <div class="container text-center">
+            <h6 class="section-subtitle">We Are Awesome</h6>
+            <h6 class="section-title mb-6">Some Fun Fucts</h6>
+                <div class="widget-2">
+                    <div class="widget-item">
+                        <i class="ti-cup"></i>
+                        <h6 class="title">50+</h6>
+                        <div class="subtitle">Awards Won</div>
+                    </div>
+                    <div class="widget-item">
+                        <i class="ti-face-smile"></i>
+                        <h6 class="title">80+</h6>
+                        <div class="subtitle">Happy Clients</div>
+                    </div>
+                    <div class="widget-item">
+                        <i class="ti-blackboard"></i>
+                        <h6 class="title">80+</h6>
+                        <div class="subtitle">Project Completed</div>
+                    </div>
+                    <div class="widget-item">
+                        <i class="ti-comments-smiley"></i>
+                        <h6 class="title">5K+</h6>
+                        <div class="subtitle">Comments</div>
+                    </div>
+                </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="contact-card">
+                <div class="infos">
+                    <h6 class="section-subtitle">Get Here</h6>
+                    <h6 class="section-title mb-4">Contact Us</h6>
+
+                    <div class="item">
+                        <i class="ti-location-pin"></i>
+                        <div class="">
+                            <h5>Location</h5>
+                            <p> Amritapuri Kollam Kerala India</p>
+                        </div>                          
+                    </div>
+                    <div class="item">
+                        <i class="ti-mobile"></i>
+                        <div>
+                            <h5>Phone Number</h5>
+                            <p>(123) 456-7890</p>
+                        </div>                          
+                    </div>
+                    <div class="item">
+                        <i class="ti-email"></i>
+                        <div class="mb-0">
+                            <h5>Email Address</h5>
+                            <p>creative_studio@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="form">
+                    <h6 class="section-subtitle">Available 24/7</h6>
+                    <h6 class="section-title mb-4">Get In Touch</h6>
+                    <form>
+                        <div class="form-group">
+                            <textarea name="contact-message" id="" cols="30" rows="7" class="form-control form-control-lg" placeholder="Message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block btn-lg mt-3">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section -->
+
+    <section class="has-bg-img py-0">
+        <div class="container">
+            <div class="footer">
+                <div class="footer-lists">
+                    <ul class="list">
+                        <li class="list-head">
+                            <h6 class="font-weight-bold">ABOUT US</h6>
+                        </li>
+                        <li class="list-body">
+                            <a href="#" class="logo">
+                                <img src="{% static 'assets/imgs/logo.png'%}" alt="Image">
+                                <h6>Creative Studio</h6>
+                            </a>
+                            
+                                             
+                        </li>
+                    </ul>
+                    <ul class="list">
+                        <li class="list-head">
+                            <h6 class="font-weight-bold">USEFUL LINKS</h6>
+                        </li>
+                        <li class="list-body">
+                            <div class="row">
+                                <div class="col">
+                                    <a href="#about">About</a>
+                                    <a href="#service">Services</a>
+                                    <a href="#portfolio">Portfolio</a>
+                                </div>
+                                <div class="col">
+                                    <a href="#team">Team</a>
+                                                    
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="list">
+                        <li class="list-head">
+                            <h6 class="font-weight-bold">CONTACT INFO</h6>
+                        </li>
+                        <li class="list-body">
+                            <p>Contact us and we'll get back to you within 24 hours.</p>
+                            <p><i class="ti-location-pin"></i> Amritapuri Kollam Kerala India</p>
+                            <p><i class="ti-email"></i>  creative_studio@gmail.com</p>
+                            <div class="social-links">
+                                <a href="https://facebook.com" class="link" target="blank"><i class="ti-facebook"></i></a>
+                                <a href="https://twitter.com" class="link" target="blank"><i class="ti-twitter-alt"></i></a>
+                                <a href="https://google.com" class="link" target="blank"><i class="ti-google"></i></a>
+                                <a href="https://pinterest.com" class="link" target="blank"><i class="ti-pinterest-alt"></i></a>
+                                <a href="https://instagram.com" class="link" target="blank"><i class="ti-instagram"></i></a>
+                                <a href="https://rss.com" class="link" target="blank"><i class="ti-rss"></i></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>    
+        </div>
+    </section>
+
+    <!-- core  -->
+    <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
+    <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+
+    <!-- bootstrap affix -->
+    <script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
+
+    <!-- Creative Studio js -->
+    <script src="assets/js/creative-studio.js"></script>
+
+</body>
+</html>
